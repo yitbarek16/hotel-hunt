@@ -1,0 +1,20 @@
+{
+  "name": "hotel-hunt",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "db:generate": "turbo run db:generate --filter=@hotel-hunt/database",
+    "db:push": "turbo run db:push --filter=@hotel-hunt/database",
+    "db:seed": "turbo run db:seed --filter=@hotel-hunt/database"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.4"
+  },
+  "packageManager": "npm@10.9.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
