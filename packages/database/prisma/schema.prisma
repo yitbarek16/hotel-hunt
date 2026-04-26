@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Hotel {
+  id        String     @id @default(cuid())
+  name      String
+  createdAt DateTime   @default(now())
+  roomTypes RoomType[]
+}
+
+model RoomType {
+  id          String @id @default(cuid())
+  hotelId     String
+  type        String
+  priceEtb    Int
+  totalRooms  Int
+  bookedRooms Int    @default(0)
+  hotel       Hotel  @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+  bids        Bid[]
+
+  @@index([hotelId])
+}
+
+enum BidStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  BOOKED
+}
+
+model Bid {
+  id           String    @id @default(cuid())
+  roomTypeId   String
+  name         String
+  phone        String
+  offeredPrice Int
+  status       BidStatus @default(PENDING)
+  createdAt    DateTime  @default(now())
+  roomType     RoomType  @relation(fields: [roomTypeId], references: [id], onDelete: Cascade)
+
+  @@index([roomTypeId])
+  @@index([status])
+}
