@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Hotel {
+  id       Int     @id @default(autoincrement())
+  name     String
+  location String
+  phone    String
+  rooms    Room[]
+}
+
+model Room {
+  id            Int    @id @default(autoincrement())
+  hotelId       Int
+  hotel         Hotel  @relation(fields: [hotelId], references: [id])
+  roomType      String
+  price         Float
+  totalRooms    Int
+  bookedRooms   Int    @default(0)
+  image         String?
+}
+
+model Bid {
+  id        Int    @id @default(autoincrement())
+  name      String
+  phone     String
+  bidPrice  Float
+  status    String   @default("pending")
+  roomId    Int
+}

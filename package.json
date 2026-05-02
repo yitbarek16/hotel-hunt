@@ -1,0 +1,31 @@
+{
+  "name": "hotel-hunt",
+  "private": true,
+  "packageManager": "npm@11.12.1",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yitbarek16/hotel-hunt.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/yitbarek16/hotel-hunt/issues"
+  },
+  "homepage": "https://github.com/yitbarek16/hotel-hunt#readme",
+  "devDependencies": {
+    "turbo": "^2.9.7"
+  }
+}
