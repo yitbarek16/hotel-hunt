@@ -4,10 +4,11 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Hotel {
-  id       Int     @id @default(autoincrement())
+  id       String @id @default(cuid())
   name     String
   location String
   phone    String
@@ -15,21 +16,28 @@ model Hotel {
 }
 
 model Room {
-  id            Int    @id @default(autoincrement())
-  hotelId       Int
-  hotel         Hotel  @relation(fields: [hotelId], references: [id])
-  roomType      String
-  price         Float
-  totalRooms    Int
-  bookedRooms   Int    @default(0)
-  image         String?
+  id          String @id @default(cuid())
+  type        String
+  price       Int
+  totalRooms  Int
+  bookedRooms Int @default(0)
+
+  hotelId     String   
+
+  hotel       Hotel    @relation(fields: [hotelId], references: [id])
+
+  bids        Bid[]
 }
 
 model Bid {
-  id        Int    @id @default(autoincrement())
+  id        String   @id @default(cuid())
   name      String
   phone     String
-  bidPrice  Float
-  status    String   @default("pending")
-  roomId    Int
+  amount    Int
+  status    String   @default("PENDING") // PENDING | ACCEPTED | REJECTED | BOOKED
+
+  room      Room     @relation(fields: [roomId], references: [id])
+  roomId    String
+
+  createdAt DateTime @default(now())
 }

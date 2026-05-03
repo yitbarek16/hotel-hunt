@@ -9,11 +9,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
+    "@prisma/client": "^6.19.3",
     "dotenv": "^17.4.2"
   },
   "devDependencies": {
-    "prisma": "^7.8.0"
+    "prisma": "^6.19.3"
   }
 }
