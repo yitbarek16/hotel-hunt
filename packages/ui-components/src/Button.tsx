@@ -1,9 +1,9 @@
 import React from "react";
 
-type ButtonProps = {
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
 };
 
-export const Button = ({ children }: ButtonProps) => {
-  return <button>{children}</button>;
+export const Button = ({ children, ...props }: ButtonProps) => {
+  return <button {...props}>{children}</button>;
 };
